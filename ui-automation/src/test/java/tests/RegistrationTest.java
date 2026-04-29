@@ -1,19 +1,28 @@
 package tests;
 
+import org.testng.annotations.BeforeMethod;
+
 import org.testng.annotations.Test;
 
-import Page.RegistrationPage;
+import pages.RegistrationPage;
 import base.BaseTest;
 
 public class RegistrationTest extends BaseTest
 {
+	RegistrationPage page;
+	
+	@BeforeMethod
+	public void setupPage()
+	{
+		page = new pages.RegistrationPage();
+	}
 	
 
-	@Test
+	@Test(priority = 1)
 	public void verifyUserRegistration()
 	{
-		RegistrationPage registrationPage = new RegistrationPage();
-		 registrationPage.registerUser(
+		
+		 page.registerUser(
 	                "Priya",
 	                "priya@gmail.com",
 	                "India",
@@ -21,5 +30,24 @@ public class RegistrationTest extends BaseTest
 	                "12345",
 	                "12345"
 	        );
+	}
+	
+	@Test(priority = 2)
+	public void verifyEmptySubmission()
+	{
+		page.clickSignup();
+	}
+	
+	@Test(priority = 3)
+	public void verifyInvalidEmail() {
+
+	    page.registerUser(
+	        "Priya",
+	        "priyagmailcom",   // invalid email
+	        "India",
+	        "Employee",
+	        "54321",
+	        "54321"
+	    );
 	}
 }

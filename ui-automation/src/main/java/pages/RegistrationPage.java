@@ -1,8 +1,10 @@
-package Page;
+package pages;
 
 import org.openqa.selenium.WebElement;
 
+
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 import base.BasePage;
@@ -21,47 +23,45 @@ public class RegistrationPage extends BasePage {
 	@FindBy(id="email") WebElement emailField;
 	@FindBy(id="password") WebElement passwordField;
 	@FindBy(id="confirm_password") WebElement confirmPassField;
-	@FindBy(id="country") WebElement contryDropdown;
+	@FindBy(id="country") WebElement countryDropdown;
 	@FindBy(id="account") WebElement accountDropdown;
 	@FindBy(xpath="//button[normalize-space()='Signup']") WebElement signupButton;
 	
 	//Action method
 	
-	public void enterName(String Username)
+	public void enterName(String username)
 	{
-		name.sendKeys(Username);
+		 sendKeys(name, username);
 	}
 	
 	public void selectCountry(String Country)
 	{
-		Select selectcountry = new Select(contryDropdown);
-		selectcountry.selectByVisibleText(Country);
+		new Select(countryDropdown).selectByVisibleText(Country);
 	}
 	
 	public void selectAccountType(String AccountType)
 	{
-		Select selectac = new Select (accountDropdown);
-		selectac.selectByVisibleText(AccountType);
+		new Select(accountDropdown).selectByVisibleText(AccountType);
 	}
 	
 	public void enterEmail(String email)
 	{
-		emailField.sendKeys(email);
+		sendKeys(emailField, email);
 	}
 	
 	public void enterPassword(String Password)
 	{
-		passwordField.sendKeys(Password);
+		sendKeys(passwordField, Password);
 	}
 	
 	public void enterConfirmPassword(String ConfirmPassword)
 	{
-		confirmPassField.sendKeys(ConfirmPassword);
+		sendKeys(confirmPassField,ConfirmPassword);
 	}
 	
 	public void clickSignup() 
 	{
-	        signupButton.click();
+	        clickElement(signupButton);
 	}
 	
 	 public void registerUser(String name, String email, String country,
@@ -76,5 +76,6 @@ public class RegistrationPage extends BasePage {
 				enterConfirmPassword(confirmPassword);
 				clickSignup();
 	 }
+	 
 }
 

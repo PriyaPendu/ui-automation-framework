@@ -6,8 +6,11 @@
       <class name="tests.RegistrationTest">
         <methods>
           <include name="setup"/>
+          <include name="verifyEmptySubmission"/>
           <include name="tearDown"/>
           <include name="verifyUserRegistration"/>
+          <include name="verifyInvalidEmail"/>
+          <include name="setupPage"/>
         </methods>
       </class> <!-- tests.RegistrationTest -->
     </classes>
