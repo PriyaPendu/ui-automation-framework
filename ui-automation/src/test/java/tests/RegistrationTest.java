@@ -1,5 +1,6 @@
 package tests;
 
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 
 import org.testng.annotations.Test;
@@ -39,15 +40,30 @@ public class RegistrationTest extends BaseTest
 	}
 	
 	@Test(priority = 3)
-	public void verifyInvalidEmail() {
+	public void verifyInvalidEmail() throws InterruptedException {
 
 	    page.registerUser(
 	        "Priya",
 	        "priyagmailcom",   // invalid email
 	        "India",
-	        "Employee",
+	        "Engineer",
 	        "54321",
 	        "54321"
 	    );
 	}
+	
+	@Test(priority = 4)
+	 public void verifyWeakPassword()
+	    {
+		 page.registerUser(
+			        "Priya",
+			        "priya@gmail.com",   // invalid email
+			        "India",
+			        "Engineer",
+			        "54321",
+			        "54321"
+			    );
+		 
+		 Assert.assertEquals(page.getWarninigMSG(), "Password must be at least 6 characters");
+	    }
 }

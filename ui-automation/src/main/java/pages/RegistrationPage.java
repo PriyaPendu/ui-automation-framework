@@ -1,5 +1,8 @@
 package pages;
 
+import static org.testng.Assert.assertTrue;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 
@@ -26,6 +29,7 @@ public class RegistrationPage extends BasePage {
 	@FindBy(id="country") WebElement countryDropdown;
 	@FindBy(id="account") WebElement accountDropdown;
 	@FindBy(xpath="//button[normalize-space()='Signup']") WebElement signupButton;
+	@FindBy(xpath="//p[@class='text-red-500 text-sm mt-1']") WebElement warningMessage;
 	
 	//Action method
 	
@@ -61,7 +65,22 @@ public class RegistrationPage extends BasePage {
 	
 	public void clickSignup() 
 	{
+			scrollToElement(signupButton);
 	        clickElement(signupButton);
+	}
+	
+	public String getFieldError (String fieldName)
+	{
+		//Generic xpath 
+		String xpath = "//label[@for='"+fieldName+ "']/following-sibling::div//p";
+		WebElement errorElement = driver.findElement(By.xpath(xpath));
+		return errorElement.getText();
+	}
+	
+	public String getWarninigMSG()
+	{
+		wait.until(ExpectedConditions.visibilityOf(warningMessage));
+		return warningMessage.getText();
 	}
 	
 	 public void registerUser(String name, String email, String country,

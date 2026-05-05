@@ -41,7 +41,10 @@ public class BasePage {
 	
 	// scroll helper
 	public void scrollToElement(WebElement element) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("argument[0].scrollIntoView(true):", element);
+		wait.until(ExpectedConditions.visibilityOf(element));
+	    JavascriptExecutor js = (JavascriptExecutor) driver;
+	    js.executeScript("arguments[0].scrollIntoView(true);", element);
 	}
+	
+	
 }
